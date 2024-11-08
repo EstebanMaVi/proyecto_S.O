@@ -1,0 +1,27 @@
+---
+- hosts: monitoring_server
+  become: yes  # Para ejecutar tareas como superusuario
+  tasks:
+    - name: Instalar Prometheus
+      apt:
+        name: prometheus
+        state: present
+        update_cache: yes
+
+    - name: Iniciar Prometheus
+      service:
+        name: prometheus
+        state: started
+        enabled: yes
+
+    - name: Instalar Grafana
+      apt:
+        name: grafana
+        state: present
+        update_cache: yes
+
+    - name: Iniciar Grafana
+      service:
+        name: grafana-server
+        state: started
+        enabled: yes
